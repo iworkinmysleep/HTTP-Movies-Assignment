@@ -75,3 +75,44 @@ body {
   color: red;
   text-align: center;
 }
+
+.update-form {
+  margin: 0 auto;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin: 10px;
+  text-align: center;
+}
+
+form button {
+  margin: 0 auto;
+  width: 200px;
+  background-color: lightskyblue;
+  text-align: center;
+  padding: 5px;
+}
+
+form button:hover {
+  background: white;
+  color: lightskyblue;
+}
+
+.edit-button {
+  width: 200px;
+  font-size: 18px;
+  height: 40px;
+  background: #ECD643;
+}
+
+.edit-button:hover {
+  background-color: green;
+  color: white;
+}
+
