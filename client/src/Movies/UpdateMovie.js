@@ -2,38 +2,46 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 
-const UpdateMovie = (props) => {
-	const params = useParams();
-	console.log("params", params);
+const UpdateMovie = () => {
+	const { id } = useParams();
+	console.log("id", id);
 	const history = useHistory();
-	const [movieUpdate, setMovieUpdate] = useState({ id: params.id });
+	const [movieUpdate, setMovieUpdate] = useState({
+		title: "",
+		director: "",
+		metascore: 0,
+		stars: [],
+	});
 
-	// useEffect(() => {
-	// 	axios.get(`http://localhost:5000/api/movies/${params.id}`).then(res => {
-	// 		setMovieUpdate(res.data)
-	// 	})
-	// },[params.id])
+	useEffect(() => {
+		axios
+			.get(`http://localhost:5000/api/movies/${id}`)
+			.then((res) => {
+				setMovieUpdate(res.data);
+			})
+	}, [id]);
+
+	const handleChanges = (e) => {
+		e.persist();
+		let value =
+			e.target.name === "stars" ? e.target.value.split(",") : e.target.value;
+		setMovieUpdate({
+			...movieUpdate,
+			[e.target.name]: value,
+		});
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const updatedMovie = {
-			...movieUpdate,
-			stars: movieUpdate.stars.split(", "),
-		};
+
 		axios
-			.put(`http://localhost:5000/api/movies/${params.id}`, updatedMovie)
+			.put(`http://localhost:5000/api/movies/${id}`, movieUpdate)
 			.then((res) => {
-				history.push("/");
+				history.push(`/movies/${id}`);
 			})
 			.catch((err) => console.log(err.response));
 	};
 
-	const handleChanges = (e) => {
-		setMovieUpdate({
-			...movieUpdate,
-			[e.target.name]: e.target.value,
-		});
-	};
 	return (
 		<>
 			<div className="update-form">
@@ -72,7 +80,7 @@ const UpdateMovie = (props) => {
 							type="text"
 							placeholder="new stars..."
 							name="stars"
-							value={movieUpdate.stars}
+							value={movieUpdate.stars.join(',')}
 							onChange={handleChanges}></input>
 					</label>
 					<button type="submit">Submit Changes</button>

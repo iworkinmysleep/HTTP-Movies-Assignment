@@ -66,6 +66,22 @@ body {
   color: white;
 }
 
+.edit-button {
+  position: absolute;
+  width: 35px;
+  text-align: center;
+  top: 75px;
+  right: 25px;
+  border: 1px solid grey;
+  padding: 5px 10px;
+  background-color: rgb(241, 205, 44);
+}
+
+.edit-button:hover {
+  background-color: rgb(7, 28, 41);
+  color: white;
+}
+
 .home-button {
   padding: 5px 10px;
   background-color: lightskyblue;
@@ -104,15 +120,5 @@ form button:hover {
   color: lightskyblue;
 }
 
-.edit-button {
-  width: 200px;
-  font-size: 18px;
-  height: 40px;
-  background: #ECD643;
-}
 
-.edit-button:hover {
-  background-color: green;
-  color: white;
-}
 
