@@ -81,6 +81,22 @@ body {
   background-color: rgb(7, 28, 41);
   color: white;
 }
+.delete-button {
+  position: absolute;
+  width: 35px;
+  text-align: center;
+  top: 125px;
+  font-size: 13px;
+  right: 25px;
+  border: 1px solid grey;
+  padding: 5px 10px;
+  background-color: red;
+}
+
+.delete-button:hover {
+  background-color: lightcoral;
+  color: white;
+}
 
 .home-button {
   padding: 5px 10px;

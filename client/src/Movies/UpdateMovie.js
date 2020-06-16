@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 
-const UpdateMovie = () => {
+const UpdateMovie = (props) => {
 	const { id } = useParams();
 	console.log("id", id);
 	const history = useHistory();
@@ -14,11 +14,9 @@ const UpdateMovie = () => {
 	});
 
 	useEffect(() => {
-		axios
-			.get(`http://localhost:5000/api/movies/${id}`)
-			.then((res) => {
-				setMovieUpdate(res.data);
-			})
+		axios.get(`http://localhost:5000/api/movies/${id}`).then((res) => {
+			setMovieUpdate(res.data);
+		});
 	}, [id]);
 
 	const handleChanges = (e) => {
@@ -37,6 +35,7 @@ const UpdateMovie = () => {
 		axios
 			.put(`http://localhost:5000/api/movies/${id}`, movieUpdate)
 			.then((res) => {
+				props.getMovieList();
 				history.push(`/movies/${id}`);
 			})
 			.catch((err) => console.log(err.response));
@@ -80,7 +79,7 @@ const UpdateMovie = () => {
 							type="text"
 							placeholder="new stars..."
 							name="stars"
-							value={movieUpdate.stars.join(',')}
+							value={movieUpdate.stars.join(",")}
 							onChange={handleChanges}></input>
 					</label>
 					<button type="submit">Submit Changes</button>
